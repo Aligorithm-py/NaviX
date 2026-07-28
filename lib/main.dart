@@ -1760,7 +1760,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> with TickerProviderStateMixin, WidgetsBindingObserver {
   // === API & Controllers ===
-  final String _tomTomKey = "1btviKUSkbAwWBLrzprTNJP3Gb2DSUsd";
+  final string get _tomTomKey => dotenv.env['TOMTOM_API_KEY'] ?? '';
   final TextEditingController _fromController = TextEditingController();
   final TextEditingController _toController = TextEditingController();
   final TextEditingController _fuelController = TextEditingController(text: "5.5");
