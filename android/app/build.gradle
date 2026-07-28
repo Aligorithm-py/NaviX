@@ -1,0 +1,54 @@
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.aligorithm.ecoroute"
+    compileSdk = 36
+    ndkVersion = flutter.ndkVersion
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+        coreLibraryDesugaringEnabled true
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    defaultConfig {
+        applicationId = "com.aligorithm.ecoroute"
+        minSdkVersion = flutter.minSdkVersion
+        targetSdk = 36
+        versionCode = 43
+        versionName = "v1.8"
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile = file("C:\\Users\\MSI PC\\PyCharmMiscProject\\navi_x_new\\navi_x_fixed\\android\\app\\upload-keystore.jks")
+            storePassword = "10Ak1094."
+            keyAlias = "upload"
+            keyPassword = "10Ak1094."
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.getByName("release")
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
+}
+
+flutter {
+    source = "../.."
+}
