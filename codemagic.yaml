@@ -7,9 +7,9 @@ workflows:
       - name: Disable Swift Package Manager
         script: |
           flutter config --no-enable-swift-package-manager
-      - name: Install dependencies
+      - name: Install Dependencies
         script: |
-          flutter packages get
+          flutter pub get
       - name: Build iOS
         script: |
-          flutter build ipa --release
+          flutter build ipa --release --no-codesign
