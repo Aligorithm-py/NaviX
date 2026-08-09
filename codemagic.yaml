@@ -4,14 +4,16 @@ workflows:
     environment:
       flutter: stable
     scripts:
+      - name: Force disable Swift Package Manager
+        script: |
+          # Flutter'ın SPM'i zorlamasını engelle
+          flutter config --no-enable-swift-package-manager
       - name: Install dependencies
         script: |
           flutter pub get
-      - name: CocoaPods install
+      - name: Clean and Build iOS
         script: |
           cd ios
           pod install
           cd ..
-      - name: Build iOS
-        script: |
           flutter build ios --release --no-codesign
