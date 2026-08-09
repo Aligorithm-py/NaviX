@@ -36,7 +36,6 @@ flutter:
 
   assets:
     - assets/icon.png
-    - .env
 
 # ========== UYGULAMA İKONU YAPILANDIRMASI ==========
 flutter_launcher_icons:
