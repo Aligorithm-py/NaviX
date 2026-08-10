@@ -3,9 +3,10 @@ workflows:
     name: Default Workflow
     environment:
       flutter: stable
-      vars:
-        # Eğer entegre ettiğin API key için bir isim verdiysen buraya yazabilirsin,
-        # boş bırakırsan varsayılan bağlı olan integration anahtarını kullanır.
+      # Codemagic'in Apple portali ile eşleşmesi için provisioning profile ayarını aktif ediyoruz
+      ios_signing:
+        distribution_type: app_store
+        bundle_identifier: com.aligorithm.istanbulNavigasyon
     scripts:
       - name: Install dependencies
         script: |
@@ -15,7 +16,7 @@ workflows:
           flutter config --no-enable-swift-package-manager
       - name: Build iOS IPA Release
         script: |
-          flutter build ipa --release --no-codesign
+          flutter build ipa --release
     publishing:
       app_store_connect:
         auth: integration
