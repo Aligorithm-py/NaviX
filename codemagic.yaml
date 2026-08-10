@@ -10,6 +10,10 @@ workflows:
       - name: Disable Swift Package Manager to fix CocoaPods conflict
         script: |
           flutter config --no-enable-swift-package-manager
-      - name: Build iOS
+      - name: Build iOS IPA
         script: |
-          flutter build ios --release --no-codesign
+          flutter build ipa --release
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
