@@ -7,10 +7,6 @@ workflows:
       - name: Install dependencies
         script: |
           flutter pub get
-      - name: Build iOS without automatic pod integration error
+      - name: Build iOS
         script: |
-          # Flutter'ın kendi build komutu yerine ios klasöründe pod update yapıp build'i tetikleyelim
-          cd ios
-          pod install --repo-update
-          cd ..
-          flutter build ios --release --no-codesign --no-pub
+          flutter build ios --release --no-codesign
