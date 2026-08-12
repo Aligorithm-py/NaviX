@@ -1,9 +1,9 @@
-name: istanbul_navigasyon
+name: Navi X-İstanbul'un Navigasyonu
 description: İstanbul'un Navigasyonu-Navi X
 
 publish_to: 'none'
 
-version: 2.0.0+38
+version: 2.0.0+41
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
@@ -42,6 +42,7 @@ flutter:
 flutter_launcher_icons:
   android: "launcher_icon"
   ios: true
+  deployment-target: '15.0'
   image_path: "assets/icon.png"
   min_sdk_android: 21
   adaptive_icon_background: "#02040A"
