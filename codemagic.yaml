@@ -11,12 +11,15 @@ workflows:
       - name: Install dependencies
         script: |
           flutter pub get
+      - name: Generate launcher icons
+        script: |
+          flutter pub run flutter_launcher_icons:main
       - name: Disable Swift Package Manager to fix CocoaPods conflict
         script: |
           flutter config --no-enable-swift-package-manager
       - name: Build iOS IPA Release
         script: |
-          flutter build ipa --release
+          flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
     publishing:
       app_store_connect:
         auth: integration
