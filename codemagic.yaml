@@ -3,7 +3,6 @@ workflows:
     name: Default Workflow
     environment:
       flutter: stable
-      # Codemagic'in Apple portali ile eşleşmesi için provisioning profile ayarını aktif ediyoruz
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.aligorithm.istanbulNavigasyon
@@ -17,9 +16,12 @@ workflows:
       - name: Disable Swift Package Manager to fix CocoaPods conflict
         script: |
           flutter config --no-enable-swift-package-manager
+      - name: Clean Android build cache
+        script: |
+          cd android && ./gradlew clean && cd ..
       - name: Build iOS IPA Release
         script: |
-          flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
+          flutter build ipa --release
     publishing:
       app_store_connect:
         auth: integration
