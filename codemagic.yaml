@@ -24,7 +24,7 @@ workflows:
           cd android && ./gradlew clean && cd ..
       - name: Build iOS IPA Release
         script: |
-          flutter build ipa --release --verbose
+          flutter build ipa --release --build-name=2.0.0 --build-number=47
     publishing:
       app_store_connect:
         auth: integration
