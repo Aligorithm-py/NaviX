@@ -16,12 +16,15 @@ workflows:
       - name: Disable Swift Package Manager to fix CocoaPods conflict
         script: |
           flutter config --no-enable-swift-package-manager
+      - name: Clean Flutter cache
+        script: |
+          flutter clean
       - name: Clean Android build cache
         script: |
           cd android && ./gradlew clean && cd ..
       - name: Build iOS IPA Release
         script: |
-          flutter build ipa --release
+          flutter build ipa --release --verbose
     publishing:
       app_store_connect:
         auth: integration
