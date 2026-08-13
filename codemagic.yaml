@@ -33,7 +33,7 @@ workflows:
                      -exportOptionsPlist ExportOptions.plist \
                      -exportPath $HOME/Library/Developer/Xcode/DerivedData/Build/Intermediates.noindex/ArchiveIntermediates/Runner/InstallationProductsPath/Applications/
           cd ..
-        publishing:
-        app_store_connect:
-          auth: integration
-          submit_to_testflight: true
+    publishing:
+      app_store_connect:
+        auth: integration
+        submit_to_testflight: true
