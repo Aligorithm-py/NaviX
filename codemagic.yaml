@@ -19,13 +19,21 @@ workflows:
       - name: Clean Flutter cache
         script: |
           flutter clean
-      - name: Clean Android build cache
+      - name: Build iOS Release via Xcode
         script: |
-          cd android && ./gradlew clean && cd ..
-      - name: Build iOS IPA Release
-        script: |
-          flutter build ipa --release --build-name=2.0.0 --build-number=47
-    publishing:
-      app_store_connect:
-        auth: integration
-        submit_to_testflight: true
+          cd ios
+          xcodebuild -workspace Runner.xcworkspace \
+                     -scheme Runner \
+                     -configuration Release \
+                     -sdk iphoneos \
+                     -archivePath $HOME/Library/Developer/Xcode/Archives/Runner.xcarchive \
+                     archive
+          xcodebuild -exportArchive \
+                     -archivePath $HOME/Library/Developer/Xcode/Archives/Runner.xcarchive \
+                     -exportOptionsPlist ExportOptions.plist \
+                     -exportPath $HOME/Library/Developer/Xcode/DerivedData/Build/Intermediates.noindex/ArchiveIntermediates/Runner/InstallationProductsPath/Applications/
+          cd ..
+        publishing:
+        app_store_connect:
+          auth: integration
+          submit_to_testflight: true
