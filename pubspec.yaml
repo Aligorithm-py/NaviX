@@ -3,7 +3,7 @@ description: İstanbul'un Navigasyonu-Navi X
 
 publish_to: 'none'
 
-version: 2.0.0+49
+version: 2.0.0+50
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
