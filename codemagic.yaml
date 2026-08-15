@@ -26,7 +26,7 @@ workflows:
           app-store-connect fetch-signing-files
       - name: Build iOS Release IPA
         script: |
-          flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
+          flutter build ipa --release
     publishing:
       app_store_connect:
         auth: integration
