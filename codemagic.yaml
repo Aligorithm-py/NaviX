@@ -2,7 +2,7 @@ workflows:
   default-workflow:
     name: Default Workflow
     environment:
-      flutter: stable
+      flutter: 3.24.3
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.aligorithm.istanbulNavigasyon
@@ -22,7 +22,6 @@ workflows:
           flutter pub get
       - name: Set up code signing settings
         script: |
-          # Codemagic otomatik imzalama yapılandırmasını uygular
           app-store-connect fetch-signing-files
       - name: Build iOS Release IPA
         script: |
