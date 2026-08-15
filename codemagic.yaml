@@ -7,6 +7,12 @@ workflows:
         distribution_type: app_store
         bundle_identifier: com.aligorithm.istanbulNavigasyon
     scripts:
+      - name: Force Clean Everything (Cache Bypass)
+        script: |
+          rm -rf build/
+          rm -rf ios/Pods/
+          rm -rf ios/.symlinks/
+          flutter clean
       - name: Install dependencies
         script: |
           flutter pub get
@@ -16,10 +22,6 @@ workflows:
       - name: Disable Swift Package Manager to fix CocoaPods conflict
         script: |
           flutter config --no-enable-swift-package-manager
-      - name: Clean Flutter cache
-        script: |
-          flutter clean
-          flutter pub get
       - name: Set up code signing settings
         script: |
           app-store-connect fetch-signing-files
