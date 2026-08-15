@@ -19,20 +19,14 @@ workflows:
       - name: Clean Flutter cache
         script: |
           flutter clean
-      - name: Build iOS Release via Xcode
+          flutter pub get
+      - name: Set up code signing settings
         script: |
-          cd ios
-          xcodebuild -workspace Runner.xcworkspace \
-                     -scheme Runner \
-                     -configuration Release \
-                     -sdk iphoneos \
-                     -archivePath $HOME/Library/Developer/Xcode/Archives/Runner.xcarchive \
-                     archive
-          xcodebuild -exportArchive \
-                     -archivePath $HOME/Library/Developer/Xcode/Archives/Runner.xcarchive \
-                     -exportOptionsPlist ExportOptions.plist \
-                     -exportPath $HOME/Library/Developer/Xcode/DerivedData/Build/Intermediates.noindex/ArchiveIntermediates/Runner/InstallationProductsPath/Applications/
-          cd ..
+          # Codemagic otomatik imzalama yapılandırmasını uygular
+          app-store-connect fetch-signing-files
+      - name: Build iOS Release IPA
+        script: |
+          flutter build ipa --release --export-options-plist=ios/ExportOptions.plist
     publishing:
       app_store_connect:
         auth: integration
