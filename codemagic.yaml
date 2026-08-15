@@ -27,7 +27,7 @@ workflows:
           app-store-connect fetch-signing-files
       - name: Build iOS Release IPA
         script: |
-          flutter build ipa --release
+          flutter build ipa --release --build-name=2.0.0 --build-number=58
     publishing:
       app_store_connect:
         auth: integration
