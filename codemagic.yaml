@@ -20,5 +20,7 @@ workflows:
       - build/app/outputs/bundle/release/*.aab
     publishing:
       app_store_connect:
-        auth: integration
+        api_key: "729WXR2HQV"
+        key_id: "2HT9RK6864"
+        issuer_id: "392f0cdf-666f-4e72-9869-83b25e0c5e08"
         submit_to_testflight: true
