@@ -5,38 +5,19 @@ workflows:
       flutter: 3.24.3
       xcode: latest
       cocoapods: default
-      groups:
-        - app_store_credentials # Eğer Codemagic UI'da environment group tanımlıysa
       vars:
-        APP_STORE_CONNECT_ISSUER_ID: "392f0cdf-666f-4e72-9869-83b25e0c5e08"
-        APP_STORE_CONNECT_KEY_ID: "2HT9RK6864"
-      ios_signing:
-        distribution_type: app_store
-        bundle_identifier: com.aligorithm.istanbulNavigasyon
+        BUNDLE_IDENTIFIER: "com.aligorithm.istanbulNavigasyon"
     scripts:
-      - name: Force Clean Everything
+      - name: Clean project
         script: |
           flutter clean
-          rm -rf ios/Pods ios/Podfile.lock build
-      - name: Install dependencies
-        script: |
           flutter pub get
-      - name: Set up code signing settings
-        script: |
-          keychain initialize
-          app-store-connect fetch-signing-files $([ -z "$APP_STORE_CONNECT_KEY_ID" ] || echo "com.aligorithm.istanbulNavigasyon") \
-            --type IOS_APP_STORE \
-            --create
-          keychain add-certificates
-          xcode-project use-profiles
       - name: Build iOS Release IPA
         script: |
-          flutter build ipa --release \
-            --build-name=2.0.0 \
-            --build-number=59 \
-            --export-options-plist=/Users/builder/export_options.plist
+          flutter build ipa --release --build-name=2.0.0 --build-number=59
     artifacts:
       - build/ios/ipa/*.ipa
+      - build/app/outputs/bundle/release/*.aab
     publishing:
       app_store_connect:
         auth: integration
