@@ -15,12 +15,9 @@ workflows:
       - name: Build iOS Release IPA
         script: |
           flutter build ipa --release --build-name=2.0.0 --build-number=59
+      - name: Upload to TestFlight via altool
+        script: |
+          xcrun altool --upload-app --type ios -f build/ios/ipa/*.ipa --apiKey 729WXR2HQV --apiIssuer 392f0cdf-666f-4e72-9869-83b25e0c5e08
     artifacts:
       - build/ios/ipa/*.ipa
       - build/app/outputs/bundle/release/*.aab
-    publishing:
-      app_store_connect:
-        api_key: "729WXR2HQV"
-        key_id: "2HT9RK6864"
-        issuer_id: "392f0cdf-666f-4e72-9869-83b25e0c5e08"
-        submit_to_testflight: true
