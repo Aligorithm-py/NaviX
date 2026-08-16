@@ -29,11 +29,10 @@ workflows:
           app-store-connect fetch-signing-files com.aligorithm.istanbulNavigasyon --create --type IOS_APP_STORE --platform IOS --issuer-id 392f0cdf-666f-4e72-9869-83b25e0c5e08 --key-id 2HT9RK6864 --private-key @env:AUTH_KEY --certificate-key @env:CERTIFICATE_KEY
       - name: Build iOS Release IPA
         script: |
-          flutter build ipa --release --export-options-plist=ios/ExportOptions.plist --build-name=2.0.0 --build-number=59
+          flutter build ipa --release --build-name=2.0.0 --build-number=59
+      - name: Publish to TestFlight via App Store Connect API
+        script: |
+          xcrun altool --upload-app --type ios -f build/ios/ipa/*.ipa --apiKey 2HT9RK6864 --apiIssuer 392f0cdf-666f-4e72-9869-83b25e0c5e08
     artifacts:
       - build/ios/ipa/*.ipa
       - build/app/outputs/bundle/release/*.aab
-    publishing:
-      app_store_connect:
-        auth: integration
-        submit_to_testflight: true
