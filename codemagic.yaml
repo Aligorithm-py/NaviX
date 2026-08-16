@@ -3,6 +3,8 @@ workflows:
     name: Default Workflow
     environment:
       flutter: 3.24.3
+      xcode: latest
+      cocoapods: default
       ios_signing:
         distribution_type: app_store
         bundle_identifier: com.aligorithm.istanbulNavigasyon
@@ -24,7 +26,7 @@ workflows:
           flutter config --no-enable-swift-package-manager
       - name: Set up code signing settings
         script: |
-          app-store-connect fetch-signing-files com.aligorithm.istanbulNavigasyon --create --type IOS_APP_STORE --platform IOS --issuer-id $APP_STORE_CONNECT_ISSUER_ID --key-id $APP_STORE_CONNECT_KEY_ID --private-key $APP_STORE_CONNECT_PRIVATE_KEY
+          app-store-connect fetch-signing-files com.aligorithm.istanbulNavigasyon --create --type IOS_APP_STORE --platform IOS --issuer-id 392f0cdf-666f-4e72-9869-83b25e0c5e08 --key-id 2HT9RK6864 --private-key @env:AUTH_KEY --certificate-key @env:CERTIFICATE_KEY
       - name: Build iOS Release IPA
         script: |
           flutter build ipa --release --build-name=2.0.0 --build-number=59
@@ -34,6 +36,7 @@ workflows:
           find build/ios/archive -name "*.ipa" -exec cp {} build/ios/ipa/ \;
     artifacts:
       - build/ios/ipa/*.ipa
+      - build/app/outputs/bundle/release/*.aab
     publishing:
       app_store_connect:
         auth: integration
